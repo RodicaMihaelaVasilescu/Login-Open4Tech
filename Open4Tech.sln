@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open4Tech", "Open4Tech\Open4Tech.csproj", "{8CED90B7-6372-486F-A5B9-91D765F47965}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CED90B7-6372-486F-A5B9-91D765F47965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CED90B7-6372-486F-A5B9-91D765F47965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CED90B7-6372-486F-A5B9-91D765F47965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CED90B7-6372-486F-A5B9-91D765F47965}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DAB5739-4421-4833-94BF-7C456837CAD3}
+	EndGlobalSection
+EndGlobal
