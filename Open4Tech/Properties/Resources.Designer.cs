@@ -106,7 +106,7 @@ namespace Open4Tech.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We received a request to confirm your account. Your account confirmation code is:.
+        ///   Looks up a localized string similar to We received a request to confirm your account. Your account confirmation code is: .
         /// </summary>
         internal static string GenericEmailContent {
             get {

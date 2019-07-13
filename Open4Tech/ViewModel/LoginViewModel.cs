@@ -1,16 +1,19 @@
-﻿using GalaSoft.MvvmLight.Command;
-using Open4Tech.Model;
+﻿using Open4Tech.Model;
 using System.Windows;
 using System.Windows.Input;
 using System.ComponentModel;
 using Open4Tech.Helper;
-using System.IO;
 using Open4Tech.Properties;
+using System.Net.Mail;
+using System;
+using Open4Tech.Command;
 
 namespace Open4Tech.ViewModel
 {
     class LoginViewModel : INotifyPropertyChanged
     {
+        #region Properties
+
         private ForgotPasswordViewModel forgotPasswordViewModel;
 
         public ICommand LoginCommand { get; set; }
@@ -32,17 +35,22 @@ namespace Open4Tech.ViewModel
             }
         }
 
+        #endregion
+
+        #region Constructor
         public LoginViewModel()
         {
             UserModel.Instance.Email = Email;
             LoginCommand = new RelayCommand(LoginCommandExecute);
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
             ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
+            Login();
         }
+        #endregion
 
+        #region Private Methods
         private void LoginCommandExecute()
         {
-            //Process.Start(new ProcessStartInfo("https://www.google.com/"));
             UserModel.Instance.Email = Email;
             if (UserModel.Instance.Email == null || UserModel.Instance.Password == null)
             {
@@ -89,6 +97,14 @@ namespace Open4Tech.ViewModel
             }
             window.Show();
         }
+        private void Login()
+        {
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587); ;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("ArtClub.App@gmail.com", "ArtClub.App@gmail.com");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(new MailMessage("ArtClub.App@gmail.com", "wpfapp.app@gmail.com", "Login Alert", DateTime.Now.ToString() + "\n" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
+        }
+        #endregion
 
         #region INotifyPropertyChanged
 

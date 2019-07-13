@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Open4Tech.Command;
 using Open4Tech.Helper;
 using Open4Tech.Model;
 using Open4Tech.Properties;
@@ -11,6 +11,8 @@ namespace Open4Tech.ViewModel
 {
     class ConfirmationCodeViewModel : INotifyPropertyChanged
     {
+        #region Properties
+
         public Action CloseAction { get; set; }
 
         public ICommand ContinueCommand { get; set; }
@@ -32,12 +34,18 @@ namespace Open4Tech.ViewModel
             }
         }
 
+    #endregion
+
+        #region Constructor
         public ConfirmationCodeViewModel(string code)
         {
             SentConfirmationCode = code;
             ContinueCommand = new RelayCommand(ContinueCommandExecute);
         }
 
+    #endregion
+
+        #region Private Methods
         private void ContinueCommandExecute()
         {
 
@@ -64,7 +72,8 @@ namespace Open4Tech.ViewModel
                 MessageBox.Show("Incorrect code. Try again!");
             }
         }
-
+        #endregion
+    
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;

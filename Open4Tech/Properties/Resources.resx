@@ -133,7 +133,7 @@
     <value>ForgotPassword</value>
   </data>
   <data name="GenericEmailContent" xml:space="preserve">
-    <value>We received a request to confirm your account. Your account confirmation code is:</value>
+    <value>We received a request to confirm your account. Your account confirmation code is: </value>
   </data>
   <data name="HomepageControlPath" xml:space="preserve">
     <value>Open4Tech.View.HomepageControl</value>

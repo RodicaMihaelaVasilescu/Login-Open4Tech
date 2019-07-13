@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Open4Tech.Command;
 using Open4Tech.Helper;
 using Open4Tech.Model;
 using Open4Tech.Properties;
@@ -12,6 +12,8 @@ namespace Open4Tech.ViewModel
 {
     class ForgotPasswordViewModel : EmailNotification, INotifyPropertyChanged
     {
+        #region Properties
+
         public Action CloseAction { get; set; }
 
         public ICommand SendCommand { get; set; }
@@ -28,12 +30,17 @@ namespace Open4Tech.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
             }
         }
-
+    #endregion
+    
+        #region Constructor
         public ForgotPasswordViewModel()
         {
             SendCommand = new RelayCommand(SendCommandExecute);
         }
 
+    #endregion
+
+        #region Private Methods
         private void SendCommandExecute()
         {
             UserModel.Instance.Email = Email;
@@ -52,6 +59,7 @@ namespace Open4Tech.ViewModel
                 CloseAction?.Invoke();
             }
         }
+        #endregion
 
         #region INotifyPropertyChanged
 

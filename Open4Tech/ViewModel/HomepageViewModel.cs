@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Open4Tech.Command;
 using Open4Tech.Model;
 using System;
 using System.ComponentModel;
@@ -9,6 +9,7 @@ namespace Open4Tech.ViewModel
 {
     class HomepageViewModel : INotifyPropertyChanged
     {
+        #region Properties
         public Action CloseAction { get; set; }
 
         public ICommand LogoutCommand { get; set; }
@@ -25,13 +26,17 @@ namespace Open4Tech.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WelcomeText"));
             }
         }
+    #endregion
 
+        #region Constructor
         public HomepageViewModel()
         {
             LogoutCommand = new RelayCommand(LogoutCommandExecute);
             WelcomeText = UserModel.Instance.Email;
         }
-
+    #endregion
+   
+        #region Private Methods
         private void LogoutCommandExecute()
         {
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to log out?", "Log out", MessageBoxButtons.YesNo);
@@ -40,6 +45,7 @@ namespace Open4Tech.ViewModel
                 CloseAction?.Invoke();
             }
         }
+        #endregion
 
         #region INotifyPropertyChanged
 

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Open4Tech.Command;
 using Open4Tech.Helper;
 using Open4Tech.Model;
 using Open4Tech.Properties;
@@ -6,7 +6,6 @@ using Open4Tech.Validator;
 using Open4Tech.ViewModel.BaseClass;
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,6 +13,7 @@ namespace Open4Tech.ViewModel
 {
     class RegisterViewModel : EmailNotification, INotifyPropertyChanged
     {
+        #region Properties
         private string _email;
 
         public ICommand RegisterCommand { get; set; }
@@ -30,12 +30,16 @@ namespace Open4Tech.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
             }
         }
-
+        #endregion
+      
+        #region Constructor
         public RegisterViewModel()
         {
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
         }
+    #endregion
 
+        #region Private Methods
         private void RegisterCommandExecute()
         {
             UserModel.Instance.Email = Email;
@@ -60,6 +64,7 @@ namespace Open4Tech.ViewModel
                 CloseAction?.Invoke();
             }
         }
+        #endregion
 
         #region INotifyPropertyChanged
 
