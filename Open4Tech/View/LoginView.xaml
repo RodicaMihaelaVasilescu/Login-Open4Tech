@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Open4Tech.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Login Open4Tech" Height="450" Width="800"
+        Title="Login" Height="450" Width="800"
+        Icon="../Resources/Icon.ico"
         >
     <Grid>
         <Grid.RowDefinitions>

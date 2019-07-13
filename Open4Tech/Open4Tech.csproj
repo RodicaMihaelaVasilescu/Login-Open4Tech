@@ -158,5 +158,8 @@
   <ItemGroup>
     <Resource Include="TxtFile\text.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

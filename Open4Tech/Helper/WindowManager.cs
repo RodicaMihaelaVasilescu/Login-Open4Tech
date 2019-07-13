@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Open4Tech.Helper
 {
@@ -18,6 +19,7 @@ namespace Open4Tech.Helper
             window.Width = 800;
             window.WindowState = WindowState.Normal;
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Open4Tech;component/Resources/Icon.ico", UriKind.RelativeOrAbsolute));
 
             var controlAssembly = Assembly.Load("Open4Tech");
             var controlType = controlAssembly.GetType(controlPath);
@@ -27,5 +29,5 @@ namespace Open4Tech.Helper
 
             return window;
         }
-    }
+  }
 }
