@@ -1,5 +1,5 @@
-# LoginWPF-App
-## Open4Tech
+# Classic Login Application
+## Open4Tech WPF App
 - WPF Application
 - Design based on **Open4Tech Presentation ([Windows App Development with .NET WPF](https://www.caphyon.ro/open4tech-2019-windows-app-development-with-dotnet-wpf.html))** by [Caphyon](https://www.caphyon.ro)
 
@@ -22,6 +22,7 @@ If you forgot your password, you can reset it in a similar way, by entering a co
 
 ### The End
 Key words:
+- Visual Studio
 - WPF
 - MVVM
 - Caliburn.Micro
