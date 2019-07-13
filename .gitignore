@@ -19,9 +19,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 
-#Nuget
-[Pp]ackages
-
 # Visual Studio cache/options directory
 
 .vs/
