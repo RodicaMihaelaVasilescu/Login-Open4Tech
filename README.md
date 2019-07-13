@@ -12,4 +12,4 @@ Preview
 ![alt text](Preview/VerifyCodeWindow.jpg)
 
 ### Forgot your password?
-![alt text](Preview/ForgotPasswodrWindow.jpg)
+![alt text](Preview/ForgotPasswordWindow.jpg)
