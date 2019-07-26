@@ -1,9 +1,13 @@
 ﻿using Open4Tech.Command;
+using Open4Tech.Helper;
 using Open4Tech.Model;
+using Open4Tech.Properties;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Open4Tech.ViewModel
 {
@@ -11,6 +15,8 @@ namespace Open4Tech.ViewModel
     {
         #region Properties
         public Action CloseAction { get; set; }
+
+        private Window window;
 
         public ICommand LogoutCommand { get; set; }
 
@@ -29,8 +35,9 @@ namespace Open4Tech.ViewModel
     #endregion
 
         #region Constructor
-        public HomepageViewModel()
+        public HomepageViewModel(Window window)
         {
+            this.window = window;
             LogoutCommand = new RelayCommand(LogoutCommandExecute);
             WelcomeText = UserModel.Instance.Email;
         }
@@ -42,7 +49,8 @@ namespace Open4Tech.ViewModel
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to log out?", "Log out", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                CloseAction?.Invoke();
+                var loginViewModel = new LoginViewModel(window);
+                WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
             }
         }
         #endregion

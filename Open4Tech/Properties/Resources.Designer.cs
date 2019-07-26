@@ -133,6 +133,24 @@ namespace Open4Tech.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open4Tech.View.LoginControl.
+        /// </summary>
+        internal static string LoginControlPath {
+            get {
+                return ResourceManager.GetString("LoginControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string LoginWindowTitle {
+            get {
+                return ResourceManager.GetString("LoginWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open4Tech.View.RegisterControl.
         /// </summary>
         internal static string RegisterAccountControlPath {

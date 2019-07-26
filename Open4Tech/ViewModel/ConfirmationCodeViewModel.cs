@@ -16,8 +16,11 @@ namespace Open4Tech.ViewModel
         public Action CloseAction { get; set; }
 
         public ICommand ContinueCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
 
         private ResetPasswordViewModel resetPasswordViewModel;
+
+        private Window window;
 
         private string SentConfirmationCode;
 
@@ -37,15 +40,27 @@ namespace Open4Tech.ViewModel
     #endregion
 
         #region Constructor
-        public ConfirmationCodeViewModel(string code)
+        public ConfirmationCodeViewModel(Window window, string code)
         {
+            this.window = window;
             SentConfirmationCode = code;
             ContinueCommand = new RelayCommand(ContinueCommandExecute);
+            LoginCommand = new RelayCommand(LoginCommandExecute);
         }
 
-    #endregion
+        #endregion
 
         #region Private Methods
+        private void LoginCommandExecute()
+        {
+            var loginViewModel = new LoginViewModel(window);
+            WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
+            if (loginViewModel.CloseAction == null)
+            {
+                loginViewModel.CloseAction = () => window.Close();
+            }
+        }
+
         private void ContinueCommandExecute()
         {
 
@@ -54,18 +69,22 @@ namespace Open4Tech.ViewModel
                 if (!AccountManager.EmailExists(UserModel.Instance.Email))
                 {
                     AccountManager.RegisterAccount(UserModel.Instance.Email, UserModel.Instance.Password);
-                    CloseAction?.Invoke();
+                    var loginViewModel = new LoginViewModel(window);
+                    WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
+                    if (loginViewModel.CloseAction == null)
+                    {
+                        loginViewModel.CloseAction = () => window.Close();
+                    }
                     return;
                 }
 
-                resetPasswordViewModel = new ResetPasswordViewModel();
-                var window = WindowManager.CreateElementWindow(resetPasswordViewModel, Resources.ResetPasswordWindowTitle, Resources.ResetPasswordControlPath);
+                resetPasswordViewModel = new ResetPasswordViewModel(window);
+                WindowManager.ChangeWindowContent(window, resetPasswordViewModel, Resources.ResetPasswordWindowTitle, Resources.ResetPasswordControlPath);
                 if (resetPasswordViewModel.CloseAction == null)
                 {
                     resetPasswordViewModel.CloseAction = () => window.Close();
                 }
-                window.Show();
-                CloseAction?.Invoke();
+                //CloseAction?.Invoke();
             }
             else
             {

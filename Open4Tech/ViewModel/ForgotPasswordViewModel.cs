@@ -15,8 +15,10 @@ namespace Open4Tech.ViewModel
         #region Properties
 
         public Action CloseAction { get; set; }
-
         public ICommand SendCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
+
+        private Window window;
 
         private string _email;
 
@@ -30,33 +32,46 @@ namespace Open4Tech.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
             }
         }
-    #endregion
-    
+        #endregion
+
         #region Constructor
-        public ForgotPasswordViewModel()
+        public ForgotPasswordViewModel(Window window)
         {
+            this.window = window;
             SendCommand = new RelayCommand(SendCommandExecute);
+            LoginCommand = new RelayCommand(LoginCommandExecute);
         }
 
-    #endregion
+        #endregion
 
         #region Private Methods
+
+        private void LoginCommandExecute()
+        {
+            var loginViewModel = new LoginViewModel(window);
+            WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
+            if (loginViewModel.CloseAction == null)
+            {
+                loginViewModel.CloseAction = () => window.Close();
+            }
+        }
+
         private void SendCommandExecute()
         {
             UserModel.Instance.Email = Email;
-            if(Email == null)
+            if (Email == null)
             {
                 MessageBox.Show(string.Format("The email must be filled in.", Email), "Warning");
                 return;
             }
             if (!AccountManager.EmailExists(Email))
             {
-                MessageBox.Show( string.Format("The email {0} does not match any existing account. You must create an account.", Email), "Warning");
+                MessageBox.Show(string.Format("The email {0} does not match any existing account. You must create an account.", Email), "Warning");
                 return;
             }
-            if (SendEmailCode(Resources.RegisterAccountEmailSubject, Resources.GenericEmailContent))
+            if (SendEmailCode(window, Resources.RegisterAccountEmailSubject, Resources.GenericEmailContent))
             {
-                CloseAction?.Invoke();
+                //CloseAction?.Invoke();
             }
         }
         #endregion

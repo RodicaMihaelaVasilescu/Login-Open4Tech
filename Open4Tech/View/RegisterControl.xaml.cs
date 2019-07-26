@@ -14,7 +14,6 @@ namespace Open4Tech.View
         public RegisterControl()
         {
             InitializeComponent();
-            DataContext = new RegisterViewModel();
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)

@@ -9,9 +9,8 @@ namespace Open4Tech.Helper
 {
     public class WindowManager
     {
-        public static Window CreateElementWindow(object viewModel, string title, string controlPath)
+        public static Window ChangeWindowContent(Window window, object viewModel, string title, string controlPath)
         {
-            var window = new Window();
             window.Title = title;
             window.Background = Brushes.White;
             window.Foreground = Brushes.Black;

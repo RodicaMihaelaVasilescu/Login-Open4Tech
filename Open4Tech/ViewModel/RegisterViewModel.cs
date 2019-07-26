@@ -14,9 +14,13 @@ namespace Open4Tech.ViewModel
     class RegisterViewModel : EmailNotification, INotifyPropertyChanged
     {
         #region Properties
+
+        private Window window;
+
         private string _email;
 
         public ICommand RegisterCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
 
         public Action CloseAction { get; set; }
 
@@ -33,11 +37,23 @@ namespace Open4Tech.ViewModel
         #endregion
       
         #region Constructor
-        public RegisterViewModel()
+        public RegisterViewModel(Window window)
         {
+            this.window = window;
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
+            LoginCommand = new RelayCommand(LoginCommandExecute);
         }
-    #endregion
+
+        private void LoginCommandExecute()
+        {
+            var loginViewModel = new LoginViewModel(window);
+            WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
+            if (loginViewModel.CloseAction == null)
+            {
+                loginViewModel.CloseAction = () => window.Close();
+            }
+        }
+        #endregion
 
         #region Private Methods
         private void RegisterCommandExecute()
@@ -59,9 +75,9 @@ namespace Open4Tech.ViewModel
                 MessageBox.Show(Validator.ValidationMessage);
                 return;
             }
-            if (SendEmailCode(Resources.RegisterAccountEmailSubject, Resources.GenericEmailContent))
+            if (SendEmailCode(window, Resources.RegisterAccountEmailSubject, Resources.GenericEmailContent))
             {
-                CloseAction?.Invoke();
+                //CloseAction?.Invoke();
             }
         }
         #endregion

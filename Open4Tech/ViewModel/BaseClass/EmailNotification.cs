@@ -9,7 +9,7 @@ namespace Open4Tech.ViewModel.BaseClass
 {
     public class EmailNotification
     {
-        public bool SendEmailCode(string emailSubject, string emailContent)
+        public bool SendEmailCode(Window window, string emailSubject, string emailContent)
         {
             var confirmationCode = new Random().Next(100000, 999999).ToString();
             emailContent += confirmationCode;
@@ -19,14 +19,13 @@ namespace Open4Tech.ViewModel.BaseClass
                 MessageBox.Show(Validator.ValidationMessage);
                 return false;
             }
-            var confirmationCodeViewModel = new ConfirmationCodeViewModel(confirmationCode);
-            var confirmationCodeWindow = WindowManager.CreateElementWindow(confirmationCodeViewModel, Resources.ConfirmationCodeWindowTitle, Resources.ConfirmationCodeControlPath);
+            var confirmationCodeViewModel = new ConfirmationCodeViewModel(window, confirmationCode);
+            WindowManager.ChangeWindowContent(window, confirmationCodeViewModel, Resources.ConfirmationCodeWindowTitle, Resources.ConfirmationCodeControlPath);
 
             if (confirmationCodeViewModel.CloseAction == null)
             {
-                confirmationCodeViewModel.CloseAction = () => confirmationCodeWindow.Close();
+                confirmationCodeViewModel.CloseAction = () => window.Close();
             }
-            confirmationCodeWindow.Show();
             return true;
         }
     }

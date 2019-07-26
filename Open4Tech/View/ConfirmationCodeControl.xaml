@@ -1,49 +1,54 @@
-﻿<UserControl x:Class="Open4Tech.View.ConfirmationCodeControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Open4Tech.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Open4Tech.View.ConfirmationCodeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Open4Tech.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <StackPanel>
         <StackPanel.Background>
             <ImageBrush ImageSource="../Resources/Login.png" Stretch="UniformToFill" />
         </StackPanel.Background>
-        <TextBlock 
-              HorizontalAlignment="Center" 
-              VerticalAlignment="Top" 
-              Height="30" Width="250"
-              TextAlignment="Center"
-              FontSize="20" 
-              Foreground="White"
-              TextWrapping="Wrap" 
-              Margin="0 120 0 0"
-              Text="Enter Confirmation Code" />
+        <TextBlock
+            Width="250"
+            Height="30"
+            Margin="0,120,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            FontSize="20"
+            Foreground="White"
+            Text="Enter Confirmation Code"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
 
-        <TextBlock 
-              HorizontalAlignment="Center" 
-              VerticalAlignment="Center" 
-              TextAlignment="Center"
-              FontSize="15" 
-              Foreground="White"
-              TextWrapping="Wrap" 
-              Text="Please check your email for a message with your code. Your code is 6 numbers long." />
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="15"
+            Foreground="White"
+            Text="Please check your email for a message with your code. Your code is 6 numbers long."
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
 
-        <TextBox x:Name="ConfirmationCode" FontSize="18"  
-             Margin="0,20,0,0" 
-             TextWrapping="Wrap" 
-             VerticalAlignment="Center"
-             HorizontalAlignment="Center"
-             Height="40"
-             BorderBrush="White"
-             Foreground="White"
-             Text="{Binding ConfirmationCode, UpdateSourceTrigger=PropertyChanged}"
-             HorizontalContentAlignment="Center">
+        <TextBox
+            x:Name="ConfirmationCode"
+            Height="40"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            BorderBrush="White"
+            FontSize="18"
+            Foreground="White"
+            Text="{Binding ConfirmationCode, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap">
 
             <TextBox.InputBindings>
-                <KeyBinding Command="{Binding Path=ContinueCommand}" Key="Enter" />
+                <KeyBinding Key="Enter" Command="{Binding Path=ContinueCommand}" />
             </TextBox.InputBindings>
 
             <materialDesign:HintAssist.Hint>
@@ -52,26 +57,41 @@
 
         </TextBox>
 
-        <Button x:Name="Continue" 
-            Content="CONTINUE" 
-            FontSize="18" 
-            Margin="315,40,315,0" 
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
+        <Button
+            x:Name="Continue"
             Width="170"
             Height="40"
-            Command="{Binding ContinueCommand}"
-            />
-
-        <Button x:Name="ForgotPassword" 
-            Content="Didn't get a confirmation code?" 
-            FontSize="15" 
-            VerticalAlignment="Center"
+            Margin="315,40,315,0"
             HorizontalAlignment="Center"
-            VerticalContentAlignment="Center"
+            VerticalAlignment="Center"
+            Command="{Binding ContinueCommand}"
+            Content="CONTINUE"
+            FontSize="18" />
+
+        <Button
+            x:Name="ForgotPassword"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             HorizontalContentAlignment="Center"
-            Background="Transparent" 
-            Foreground="White"
-            BorderThickness="0"/>
+            VerticalContentAlignment="Center"
+            Background="Transparent"
+            BorderThickness="0"
+            Content="Didn't get a confirmation code?"
+            FontSize="15"
+            Foreground="White" />
+
+        <Button
+            Height="42"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding LoginCommand}"
+            Content="Go back to login"
+            FontSize="12"
+            Foreground="Black" />
     </StackPanel>
 </UserControl>

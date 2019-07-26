@@ -16,11 +16,15 @@ namespace Open4Tech.ViewModel
 
         private ForgotPasswordViewModel forgotPasswordViewModel;
 
+        private Window window;
+
         public ICommand LoginCommand { get; set; }
 
         public ICommand RegisterCommand { get; set; }
 
         public ICommand ForgotPasswordCommand { get; set; }
+
+        public Action CloseAction { get; set; }
 
         private string _email;
 
@@ -38,13 +42,14 @@ namespace Open4Tech.ViewModel
         #endregion
 
         #region Constructor
-        public LoginViewModel()
+        public LoginViewModel(Window window)
         {
+            this.window = window;
             UserModel.Instance.Email = Email;
             LoginCommand = new RelayCommand(LoginCommandExecute);
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
             ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
-            Login();
+            //Login();
         }
         #endregion
 
@@ -59,16 +64,13 @@ namespace Open4Tech.ViewModel
             }
             if(AccountManager.AccountExists(UserModel.Instance.Email, UserModel.Instance.Password))
             {
-                var homepageViewModel = new HomepageViewModel();
-                var HomepageWindow = WindowManager.CreateElementWindow(homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
+                var homepageViewModel = new HomepageViewModel(window);
+                WindowManager.ChangeWindowContent(window, homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
 
                 if (homepageViewModel.CloseAction == null)
                 {
-                    homepageViewModel.CloseAction = () => HomepageWindow.Close();
+                    homepageViewModel.CloseAction = () => window.Close();
                 }
-
-                MessageBox.Show("Succesfully logged in");
-                HomepageWindow.Show();
             }
             else
             {
@@ -79,18 +81,17 @@ namespace Open4Tech.ViewModel
         private void RegisterCommandExecute()
         {
             Email = null;
-            var registerViewModel = new RegisterViewModel();
-            var window = WindowManager.CreateElementWindow(registerViewModel, Resources.RegisterAccountWindowTitle, Resources.RegisterAccountControlPath);
+            var registerViewModel = new RegisterViewModel(window);
+            WindowManager.ChangeWindowContent(window, registerViewModel, Resources.RegisterAccountWindowTitle, Resources.RegisterAccountControlPath);
             if (registerViewModel.CloseAction == null)
             {
                 registerViewModel.CloseAction = () => window.Close();
             }
-            window.Show();
         }
         public void ForgotPasswordCommandExecute()
         {
-            forgotPasswordViewModel = new ForgotPasswordViewModel();
-            var window = WindowManager.CreateElementWindow(forgotPasswordViewModel, Resources.ForgotPasswordWindowTitle, Resources.ForgotPasswordControlPath);
+            forgotPasswordViewModel = new ForgotPasswordViewModel(window);
+            WindowManager.ChangeWindowContent(window, forgotPasswordViewModel, Resources.ForgotPasswordWindowTitle, Resources.ForgotPasswordControlPath);
             if (forgotPasswordViewModel.CloseAction == null)
             {
                 forgotPasswordViewModel.CloseAction = () => window.Close();

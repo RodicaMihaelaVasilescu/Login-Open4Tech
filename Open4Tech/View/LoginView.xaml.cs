@@ -12,18 +12,7 @@ namespace Open4Tech.View
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
-        }
-
-        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            UserModel.Instance.Password = Password.Password;
-        }
-
-        private void Click(object sender, RoutedEventArgs e)
-        {
-            Email.Text = null;
-            Password.Password = null;
+            DataContext = new LoginViewModel(this);
         }
     }
 }

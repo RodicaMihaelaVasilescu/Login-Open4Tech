@@ -13,12 +13,15 @@ namespace Open4Tech.ViewModel
         #region Properties
         public Action CloseAction { get; set; }
 
+        private Window window;
+
         public ICommand ResetCommand { get; set; }
     #endregion
 
         #region Constructor
-        public ResetPasswordViewModel()
+        public ResetPasswordViewModel(Window window)
         {
+            this.window = window;
             ResetCommand = new RelayCommand(ResetCommandExecute);
         }
     #endregion
@@ -38,8 +41,8 @@ namespace Open4Tech.ViewModel
             }
             else
             {
-                AccountManager.ChangePassword(UserModel.Instance.Email, UserModel.Instance.Password);
-                CloseAction?.Invoke();
+                AccountManager.ChangePassword(window, UserModel.Instance.Email, UserModel.Instance.Password);
+                //CloseAction?.Invoke();
             }
         }
         #endregion
