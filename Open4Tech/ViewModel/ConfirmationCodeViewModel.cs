@@ -84,7 +84,6 @@ namespace Open4Tech.ViewModel
                 {
                     resetPasswordViewModel.CloseAction = () => window.Close();
                 }
-                //CloseAction?.Invoke();
             }
             else
             {

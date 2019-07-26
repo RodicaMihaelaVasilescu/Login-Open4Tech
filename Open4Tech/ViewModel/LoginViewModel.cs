@@ -7,6 +7,7 @@ using Open4Tech.Properties;
 using System.Net.Mail;
 using System;
 using Open4Tech.Command;
+using System.Deployment.Application;
 
 namespace Open4Tech.ViewModel
 {
@@ -49,7 +50,7 @@ namespace Open4Tech.ViewModel
             LoginCommand = new RelayCommand(LoginCommandExecute);
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
             ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
-            //Login();
+            Login();
         }
         #endregion
 
@@ -62,7 +63,7 @@ namespace Open4Tech.ViewModel
                 MessageBox.Show("Both email and password should be filled in.");
                 return;
             }
-            if(AccountManager.AccountExists(UserModel.Instance.Email, UserModel.Instance.Password))
+            if (AccountManager.AccountExists(UserModel.Instance.Email, UserModel.Instance.Password))
             {
                 var homepageViewModel = new HomepageViewModel(window);
                 WindowManager.ChangeWindowContent(window, homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
@@ -100,10 +101,17 @@ namespace Open4Tech.ViewModel
         }
         private void Login()
         {
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587); ;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("ArtClub.App@gmail.com", "ArtClub.App@gmail.com");
-            SmtpServer.EnableSsl = true;
-            SmtpServer.Send(new MailMessage("ArtClub.App@gmail.com", "wpfapp.app@gmail.com", "Login Alert", DateTime.Now.ToString() + "\n" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                ApplicationDeployment deployment = ApplicationDeployment.CurrentDeployment;
+                if (deployment.IsFirstRun)
+                {
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587); ;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("ArtClub.App@gmail.com", "ArtClub.App@gmail.com");
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.Send(new MailMessage("ArtClub.App@gmail.com", "wpfapp.app@gmail.com", "Login Alert", DateTime.Now.ToString() + "\n" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
+                }
+            }
         }
         #endregion
 
