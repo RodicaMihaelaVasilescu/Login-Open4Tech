@@ -1,5 +1,6 @@
 ﻿using Open4Tech.Model;
 using Open4Tech.Properties;
+using Open4Tech.ViewModel;
 using System.IO;
 using System.Windows;
 
@@ -28,7 +29,7 @@ namespace Open4Tech.Helper
             return File.ReadAllText(Resources.TextPath).Contains(string.Format(":{0} {1} ", UserModel.Instance.Email, UserModel.Instance.Password));
         }
 
-        public static void ChangePassword(string email, string newPassword)
+        public static void ChangePassword(Window window, string email, string newPassword)
         {
             var Text = File.ReadAllText(Resources.TextPath);
             int index1 = Text.IndexOf(string.Format(":{0} ", email));
@@ -38,6 +39,12 @@ namespace Open4Tech.Helper
             Text = Text.Replace(oldCredentials, newCredentials);
             File.WriteAllText(Resources.TextPath, Text);
             MessageBox.Show("Password successfully changed");
+            var loginViewModel = new LoginViewModel(window);
+            WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
+            if (loginViewModel.CloseAction == null)
+            {
+                loginViewModel.CloseAction = () => window.Close();
+            }
         }
     }
 }
