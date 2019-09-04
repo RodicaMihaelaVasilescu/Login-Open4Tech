@@ -51,7 +51,6 @@ namespace Open4Tech.ViewModel
             LoginCommand = new RelayCommand(LoginCommandExecute);
             RegisterCommand = new RelayCommand(RegisterCommandExecute);
             ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
-            Task task = Login();
         }
         #endregion
 
@@ -100,21 +99,7 @@ namespace Open4Tech.ViewModel
             }
             window.Show();
         }
-        async Task Login()
-        {
-            string configs = string.Format( "{0}\\{1}",  Directory.GetCurrentDirectory(), "configs.txt");
-            if (!File.Exists(configs))
-            {
-                await Task.Run(() =>
-                {
-                    File.Create(configs);
-                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587); ;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("ArtClub.App@gmail.com", "ArtClub.App@gmail.com");
-                    SmtpServer.EnableSsl = true;
-                    SmtpServer.Send(new MailMessage("ArtClub.App@gmail.com", "wpfapp.app@gmail.com", "Login Alert", DateTime.Now.ToString() + "\n" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
-                });
-            }
-        }
+
         #endregion
 
         #region INotifyPropertyChanged
