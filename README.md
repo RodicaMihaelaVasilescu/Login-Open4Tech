@@ -8,7 +8,7 @@ The application allows you to access the homepage by  logging in.
 ![alt text](Preview/LoginWindow.jpg)
 
 ### Register Account
-If you do not have an account, you can create one by accessing the register option (the bottom right corner). In order to register, you must enter your email and a password. Please make sure that your email is correctly written, because **you'll receive a confirmation code on via email**.
+If you do not have an account, you can create one by accessing the register option (the bottom right corner). In order to register, you must enter your email and a password. Please make sure that your email is correctly written, because **you'll receive a confirmation code via email**.
 
 ![alt text](Preview/RegisterWindow.jpg)
 
